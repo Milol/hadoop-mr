@@ -20,16 +20,16 @@ public class Treduce extends Reducer<Tq, IntWritable, Text, IntWritable> {
     @Override
     protected void reduce(Tq key, Iterable<IntWritable> values, Context context) throws IOException, InterruptedException {
         int flag = 0;
-        int day = 0;
+        String day = "";
         for (IntWritable val :values) {
             if(flag == 0) {
                 tkey.set(key.toString());
                 tval.set(val.get());
                 context.write(tkey, tval);
                 flag++;
-                day = key.getDay();
+                day = key.toString();
             }
-            if(flag != 0 && day != key.getDay()) {
+            if(flag != 0 && !day.equals(key.toString())) {
                 tkey.set(key.toString());
                 tval.set(val.get());
                 context.write(tkey, tval);

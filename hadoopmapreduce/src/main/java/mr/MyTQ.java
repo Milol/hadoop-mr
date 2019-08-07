@@ -49,10 +49,10 @@ public class MyTQ {
         job.setPartitionerClass(TPartitioner.class);
 
 
-        //6 自定义组排序器
+        //6 自定义组排序器（界定边界，不考虑温度）
         job.setGroupingComparatorClass(TGroupingComparator.class);
 
-        //7 设置reducetask数量
+        //7 设置reducetask数量，分区
         job.setNumReduceTasks(2);
 
         //8设置reducer
